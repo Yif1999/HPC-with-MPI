@@ -7,7 +7,7 @@
 #define MAX_A (MAX_N * MAX_N) //允许最大的系数的个数
 
 #define MAX_ITERATION 10000 //最大迭代次数
-#define TOLERANCE 0.001     //误差
+#define TOLERANCE 0.001   //误差
 
 #include "mpi.h"
 #include <stdio.h>
@@ -28,7 +28,7 @@ void input()
     printf("The n is %d\n", n);
     fflush(stdout);
 
-    //输入系数
+    //输入系数矩阵
     for (i = 0; i < n; i++)
     {
         printf("Input a[%d][0] to a[%d][n-1]:\n", i, i);
@@ -68,11 +68,6 @@ bool tolerance()
         if (result_x[i] - x[i] > TOLERANCE || x[i] - result_x[i] > TOLERANCE)
             return FALSE;
 
-#ifdef DEBUG
-    printf("TRUE From %d\n", pID);
-    fflush(stdout);
-#endif
-
     //全部满足误差，返回TRUE
     return TRUE;
 }
@@ -102,14 +97,6 @@ int main(int argc, char *argv[])
     //广播b
     MPI_Bcast(b, MAX_N, MPI_FLOAT, 0, MPI_COMM_WORLD);
 
-#ifdef DEBUG
-    //打印a, b
-    for (j = 0; j < n; j++)
-        printf("%f ", b[j]);
-    printf(" From %d\n", pID);
-    fflush(stdout);
-#endif
-
     //初始化x的值
     for (i = 0; i < n; i++)
     {
@@ -137,14 +124,6 @@ int main(int argc, char *argv[])
         //同步等待
         MPI_Barrier(MPI_COMM_WORLD);
 
-#ifdef DEBUG
-        //打印本轮迭代的初始值
-        for (j = 0; j < n; j++)
-            printf("%f ", x[j]);
-        printf(" From %d\n", pID);
-        fflush(stdout);
-#endif
-
         // 迭代公式：Dx=-(L+U)x+b，其中D为对角，L为下三角，U为上三角
         //求和，即求(L+U)
         sum = -a[i][i] * x[i];
@@ -154,24 +133,8 @@ int main(int argc, char *argv[])
         //求新的x[i]
         new_x[i] = (b[i] - sum) / a[i][i];
 
-#ifdef DEBUG
-        //打印本轮迭代的结果
-        for (j = 0; j < n; j++)
-            printf("%f ", new_x[j]);
-        printf(" From %d\n", pID);
-        fflush(stdout);
-#endif
-
         //使用归约的方法，同步所有计算结果
         MPI_Allreduce(new_x, result_x, n, MPI_FLOAT, MPI_SUM, MPI_COMM_WORLD);
-
-#ifdef DEBUG
-        //打印归约后的结果
-        for (j = 0; j < n; j++)
-            printf("%f ", result_x[j]);
-        printf(" From %d\n", pID);
-        fflush(stdout);
-#endif
 
         //如果迭代次数超过了最大迭代次数则退出
         if (iteration > MAX_ITERATION)

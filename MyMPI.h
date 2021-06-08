@@ -28,6 +28,8 @@
 #define PTR_SIZE           (sizeof(void*))
 #define CEILING(i,j)       (((i)+(j)-1)/(j))
 
+void *my_malloc (int, int);
+
 /***************** MISCELLANEOUS FUNCTIONS *****************/
 
 void  terminate (int, char *);

@@ -29,7 +29,7 @@ int main (int argc, char *argv[]) {
   MPI_Comm_size (MPI_COMM_WORLD,&p) ;
   read_col_striped_matrix (argv[1], (void***) &a,(void **) &storage, mpitype, &m, &n, MPI_COMM_WORLD) ;
   read_block_vector(argv[2],(void **) &b,mpitype,&nprime,MPI_COMM_WORLD);
-  print_block_vector((void *) b,mpitype,nprime,MPI_COMM_WORLD)
+  print_block_vector((void *) b,mpitype,nprime,MPI_COMM_WORLD);
 
   c_part_out=(dtype *) my_malloc (id,n*sizeof(dtype));
   local_els=BLOCK_SIZE(id,p,n);
@@ -41,7 +41,7 @@ int main (int argc, char *argv[]) {
   create_mixed_xfer_arrays(id,p,n,&cnt_out,&disp_out);
   create_uniform_xfer_arrays(id,p,n,&cnt_in,&disp_in);
   c_part_in=(dtype *) my_malloc (id,p*local_els*sizeof(dtype));
-  MPI_ALLtoallv(c_part_out,cnt_out,disp_out,mpitype,c_part_in,cnt_in,disp_in,mpitype,MPI_COMM_WORLD);
+  MPI_Alltoallv(c_part_out,cnt_out,disp_out,mpitype,c_part_in,cnt_in,disp_in,mpitype,MPI_COMM_WORLD);
   c=(dtype *) my_malloc (id,local_els*sizeof(dtype));
   for (i=0;i<local_els;i++){
     c[i]=0.0;
@@ -52,4 +52,4 @@ int main (int argc, char *argv[]) {
     MPI_Finalize();
     return 0;
   }
-
+}
