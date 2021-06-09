@@ -5,6 +5,7 @@
     "*.wxss": "css",
     "*.wxs": "javascript",
     "string.h": "c",
-    "mympi.h": "c"
+    "mympi.h": "c",
+    "math.h": "c"
   }
 }
