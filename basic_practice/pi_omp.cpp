@@ -17,10 +17,10 @@ int main(int argc,char *argv[]){
 
   n=10000000;count=0;global_count=0;
 
-  #pragma omp parallel for
+  #pragma omp parallel for shared(count) reduction(+:sum)
   for (i=id;i<n;i+=p){
     double d=one_step(n,i);
-    #pragma omp critical
+    // #pragma omp critical
     count+=d;
   }
   
