@@ -1,4 +1,6 @@
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "meshdef.h"
 
 int main(int argc, char *argv[])
@@ -6,7 +8,7 @@ int main(int argc, char *argv[])
 	SQuadMesh mesh;
 	mesh.dwidth = 8.0;
 	mesh.dheight = 4.0;
-	mesh.ddelta = 0.05;	//通过减小此值可以增加网格数量，从而增大问题规模(测试数据分别为0.05、0.015、0.005和0.0015)
+	mesh.ddelta = 0.015;	//通过减小此值可以增加网格数量，从而增大问题规模(测试数据分别为0.05、0.015、0.005和0.0015)
 	mesh.iwid = mesh.dwidth/mesh.ddelta;
 	mesh.ihei = mesh.dheight/mesh.ddelta;
 
@@ -22,7 +24,7 @@ int main(int argc, char *argv[])
 	}else if (strcmp(argv[1],"-p")==0){
 
 	//并行计算
-
+	printf("emmm...\n");
 
 
 	}
