@@ -1,0 +1,1 @@
+mpicxx    -rdynamic CMakeFiles/solver.dir/src/2DThermal.cpp.o CMakeFiles/solver.dir/src/output_vtk.cpp.o CMakeFiles/solver.dir/src/solver_parallel.cpp.o CMakeFiles/solver.dir/src/solver_serial.cpp.o  -o solver 
