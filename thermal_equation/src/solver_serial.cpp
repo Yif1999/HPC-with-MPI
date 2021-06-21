@@ -5,11 +5,11 @@
 #include <math.h>
 #include <time.h>
 
-/*½«ÄÚ²¿Íø¸ñµãÖµ³õÊ¼ÉèÎª0£¬±ß½çÍø¸ñµãÖµÉèÎª±ß½çÌõ¼þ¸ø¶¨Öµ
- * ±ß½çÌõ¼þÎª£ºx=0, x=dwidth, y=dheight: val = 0;
+/*ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½Ê¼ï¿½ï¿½Îª0ï¿½ï¿½ï¿½ß½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½Îªï¿½ß½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+ * ï¿½ß½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½x=0, x=dwidth, y=dheight: val = 0;
  *             y=0: val[i] = sin((pi*x)/dwidth)
  */
-void initmeshdata(SQuadMesh mesh, float ***meshval, float **meshval_d, int &irow, int &icol)
+void initmeshdata_s(SQuadMesh mesh, float ***meshval, int &irow, int &icol)
 {
 	int i, j;
 	double dwidth, dheig;
@@ -20,8 +20,6 @@ void initmeshdata(SQuadMesh mesh, float ***meshval, float **meshval_d, int &irow
 	dwidth = mesh.dwidth;
 	dheig = mesh.dheight;
 
-	*meshval_d = new float[irow * icol];
-
 	*meshval = new float *[irow];
 	for (i = 0; i < irow; i++)
 	{
@@ -30,13 +28,11 @@ void initmeshdata(SQuadMesh mesh, float ***meshval, float **meshval_d, int &irow
 		{
 			if (i == irow - 1)
 			{
-				(*meshval_d)[i * icol + j] = sin(PI * ((float)j / (float)(icol - 1)));
 				(*meshval)[i][j] = sin(PI * ((float)j / (float)(icol - 1)));
 			}
 			else
 			{
 				(*meshval)[i][j] = 0.0;
-				(*meshval_d)[i * icol + j] = 0;
 			}
 		}
 	}
@@ -44,7 +40,7 @@ void initmeshdata(SQuadMesh mesh, float ***meshval, float **meshval_d, int &irow
 
 // #define _WRITE_FILE
 
-/*  »ùÓÚÓÐÏÞ²î·Ö·¨Çó½âÎÂ¶È³¡
+/*  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ²ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Â¶È³ï¿½
  * 	u_new[i,j] = (u_old[i,j-1] + u_old[i,j+1] + u_old[i-1,j] + u_old[i+1,j])/4
  */
 void solvethermal_s(float **meshval, int irow, int icol)
@@ -99,7 +95,7 @@ void solvethermal_s(float **meshval, int irow, int icol)
 
 		//maxeps = 1.0e-7;
 		iteration++;
-		//Êä³öÃ¿Ò»µü´ú²½²Ð²î
+		//ï¿½ï¿½ï¿½Ã¿Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð²ï¿½
 		printf("Iteration %d  eps:%lf\n", iteration, global_eps);
 #ifdef _WRITE_FILE
 		fprintf(fout, "%d,%lf\n", iteration, global_eps);

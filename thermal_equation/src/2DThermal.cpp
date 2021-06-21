@@ -4,8 +4,8 @@
 #include "meshdef.h"
 #include <mpi.h>
 
-#define width 8.0
-#define height 5.0
+#define width 5.0
+#define height 9.0
 #define delta 0.05
 
 int main(int argc, char *argv[])
@@ -13,47 +13,34 @@ int main(int argc, char *argv[])
 	int id;
 	int p;
 	MPI_Init(&argc,&argv);
-	MPI_Comm_rank(MPI_COMM_WORLD,&id); //»ñÈ¡½ø³ÌºÅ
-	MPI_Comm_size(MPI_COMM_WORLD,&p); //»ñÈ¡½ø³Ì×ÜÊı
+	MPI_Comm_rank(MPI_COMM_WORLD,&id); 
+	MPI_Comm_size(MPI_COMM_WORLD,&p); 
+
+	SQuadMesh mesh;
+	mesh.dwidth = width;
+	mesh.dheight = height;
+	mesh.ddelta = delta;	//é€šè¿‡å‡å°æ­¤å€¼å¯ä»¥å¢åŠ ç½‘æ ¼æ•°é‡ï¼Œä»è€Œå¢å¤§é—®é¢˜è§„æ¨¡(æµ‹è¯•æ•°æ®åˆ†åˆ«ä¸º0.05ã€0.015ã€0.005å’Œ0.0015)
+	mesh.iwid = mesh.dwidth/mesh.ddelta;
+	mesh.ihei = mesh.dheight/mesh.ddelta;
+	float **meshval_h;
+	int irow, icol, isize;
 
 	if (p==1 && id==0){
-		SQuadMesh mesh;
-		mesh.dwidth = width;
-		mesh.dheight = height;
-		mesh.ddelta = delta;	//Í¨¹ı¼õĞ¡´ËÖµ¿ÉÒÔÔö¼ÓÍø¸ñÊıÁ¿£¬´Ó¶øÔö´óÎÊÌâ¹æÄ£(²âÊÔÊı¾İ·Ö±ğÎª0.05¡¢0.015¡¢0.005ºÍ0.0015)
-		mesh.iwid = mesh.dwidth/mesh.ddelta;
-		mesh.ihei = mesh.dheight/mesh.ddelta;
+		initmeshdata_s(mesh, &meshval_h, irow, icol);
+		solvethermal_s(meshval_h, irow, icol);		//ä¸²è¡Œè®¡ç®—
+		outputdata(mesh, meshval_h, irow, icol); //è¾“å‡ºè®¡ç®—ç»“æœ
+	}else if(p<mesh.ihei+1){
+		initmeshdata_p(mesh, &meshval_h, irow, icol);
 
-		float **meshval_h, *meshval_d;
-		int irow, icol, isize;
-		initmeshdata(mesh, &meshval_h, &meshval_d, irow, icol);
-
-		//´®ĞĞ¼ÆËã
-		solvethermal_s(meshval_h, irow, icol);
-		outputdata(mesh, meshval_h, irow, icol); //ĞèÒªÊä³ö¼ÆËã½á¹ûÊ±¹Øµô¸ÄĞĞ×¢ÊÍ
-	}else if(p>1){
-		if (id==0){
-			SQuadMesh mesh;
-			mesh.dwidth = width;
-			mesh.dheight = height;
-			mesh.ddelta = delta;	//Í¨¹ı¼õĞ¡´ËÖµ¿ÉÒÔÔö¼ÓÍø¸ñÊıÁ¿£¬´Ó¶øÔö´óÎÊÌâ¹æÄ£(²âÊÔÊı¾İ·Ö±ğÎª0.05¡¢0.015¡¢0.005ºÍ0.0015)
-			mesh.iwid = mesh.dwidth/mesh.ddelta;
-			mesh.ihei = mesh.dheight/mesh.ddelta;
-
-			float **meshval_h, *meshval_d;
-			int irow, icol, isize;
-			initmeshdata(mesh, &meshval_h, &meshval_d, irow, icol);
-		}
-
-		//²¢ĞĞ¼ÆËã
-		// solvethermal_p(meshval_h, irow, icol);
-		// outputdata(mesh, meshval_h, irow, icol);
+		// solvethermal_p(meshval_h, irow, icol);		//ä¸²è¡Œè®¡ç®—
+		// outputdata(mesh, meshval_h, irow, icol); //è¾“å‡ºè®¡ç®—ç»“æœ
 		printf("emmm...\n");
 
+	}else{
+		if (!id)
+			printf("[Fatal Error] The number of parallels exceeds the nunber of height partitions, the execution is abandoned.\n-------------------------------------------------------\nTo solve this problem, you can try to reduce the number of parallels.\n");
 	}
 
-
-	
 	MPI_Finalize();
 	return 0;
 }

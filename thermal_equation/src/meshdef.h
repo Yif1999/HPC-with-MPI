@@ -12,9 +12,11 @@ typedef struct
 
 
 //声明函数
-void initmeshdata(SQuadMesh mesh, float ***meshval, float **meshval_d, int &irow, int &icol);
+void initmeshdata_s(SQuadMesh mesh, float ***meshval, int &irow, int &icol);
 
 void solvethermal_s(float **meshval, int irow, int icol);
+
+void initmeshdata_p(SQuadMesh mesh, float ***meshval, int &irow, int &icol);
 
 void solvethermal_p(float **meshval, int irow, int icol);
 

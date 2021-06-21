@@ -5,7 +5,15 @@
 #include <math.h>
 #include <time.h>
 
-/*  »ùÓÚÓÐÏÞ²î·Ö·¨Çó½âÎÂ¶È³¡
+/*ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½Ê¼ï¿½ï¿½Îª0ï¿½ï¿½ï¿½ß½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½Îªï¿½ß½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+ * ï¿½ß½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½x=0, x=dwidth, y=dheight: val = 0;
+ *             y=0: val[i] = sin((pi*x)/dwidth)
+ */
+void initmeshdata_p(SQuadMesh mesh, float ***meshval, int &irow, int &icol){
+
+}
+
+/*  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ²ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Â¶È³ï¿½
  * 	u_new[i,j] = (u_old[i,j-1] + u_old[i,j+1] + u_old[i-1,j] + u_old[i+1,j])/4
  */
 void solvethermal_p(float **meshval, int irow, int icol)
@@ -14,14 +22,6 @@ void solvethermal_p(float **meshval, int irow, int icol)
 	int i, j, k, iteration = 0;
 	float **oldval, eps = 0.0, maxeps = 0.0, global_eps = 0.0;
 
-#ifdef _WRITE_FILE
-	FILE *fout = NULL;
-	fout = fopen("iter.csv", "w");
-	if (!fout)
-	{
-		printf("Error: cann't open file!\n");
-	}
-#endif
 
 	clock_t t1 = clock();
 
@@ -60,7 +60,7 @@ void solvethermal_p(float **meshval, int irow, int icol)
 
 		//maxeps = 1.0e-7;
 		iteration++;
-		//Êä³öÃ¿Ò»µü´ú²½²Ð²î
+		//ï¿½ï¿½ï¿½Ã¿Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð²ï¿½
 		printf("Iteration %d  eps:%lf\n", iteration, global_eps);
 #ifdef _WRITE_FILE
 		fprintf(fout, "%d,%lf\n", iteration, global_eps);
