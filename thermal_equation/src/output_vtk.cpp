@@ -5,7 +5,6 @@
 #include <math.h>
 #include <time.h>
 
-//输出网格数据（VTK格式），用于分析
 void outputdata(SQuadMesh mesh, float **meshval, int irow, int icol)
 {
 	int i, j, iwid, iheig, npts;

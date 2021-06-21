@@ -17,6 +17,8 @@ meshdef.h
 /home/ai/yif/thermal_equation/src/meshdef.h
 mpi.h
 -
+time.h
+-
 
 /home/ai/yif/thermal_equation/src/meshdef.h
 
@@ -31,6 +33,8 @@ stdlib.h
 -
 math.h
 -
+time.h
+-
 
 /home/ai/yif/thermal_equation/src/solver_parallel.cpp
 meshdef.h
@@ -43,7 +47,7 @@ stdlib.h
 -
 math.h
 -
-time.h
+mpi.h
 -
 
 /home/ai/yif/thermal_equation/src/solver_serial.cpp

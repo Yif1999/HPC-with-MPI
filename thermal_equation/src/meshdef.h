@@ -16,8 +16,8 @@ void initmeshdata_s(SQuadMesh mesh, float ***meshval, int &irow, int &icol);
 
 void solvethermal_s(float **meshval, int irow, int icol);
 
-void initmeshdata_p(SQuadMesh mesh, float ***meshval, int &irow, int &icol);
+void initmeshdata_p(SQuadMesh mesh, float ***meshval, int &irow, int &icol,int id,int p);
 
-void solvethermal_p(float **meshval, int irow, int icol);
+void solvethermal_p(SQuadMesh mesh, float **meshval, int irow, int icol, int id,int p,int index);
 
 void outputdata(SQuadMesh mesh, float **meshval, int irow, int icol);

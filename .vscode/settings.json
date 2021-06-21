@@ -6,6 +6,7 @@
     "*.wxs": "javascript",
     "string.h": "c",
     "mympi.h": "c",
-    "math.h": "c"
+    "math.h": "c",
+    "cmath": "cpp"
   }
 }

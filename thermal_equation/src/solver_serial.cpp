@@ -96,14 +96,14 @@ void solvethermal_s(float **meshval, int irow, int icol)
 		//maxeps = 1.0e-7;
 		iteration++;
 		//���ÿһ�������в�
-		printf("Iteration %d  eps:%lf\n", iteration, global_eps);
+		// printf("Iteration %d  eps:%lf\n", iteration, global_eps);
 #ifdef _WRITE_FILE
 		fprintf(fout, "%d,%lf\n", iteration, global_eps);
 #endif
 	} while (global_eps > thre);
 	/*while(maxeps > thre);*/
 
-	printf("Convergenced!\n");
+	// printf("Convergenced!\n");
 
 #ifdef _WRITE_FILE
 	fclose(fout);
