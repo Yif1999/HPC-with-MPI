@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ai/yif/CFD/src/blockDivide.cpp
+math.h
+-
+stdio.h
+-
+stdlib.h
+-
+
+/home/ai/yif/CFD/src/miniCFD.cpp
+stdlib.h
+-
+string.h
+-
+stdio.h
+-
+math.h
+-
+mpi.h
+-
+
