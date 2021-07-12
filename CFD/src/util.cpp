@@ -4,7 +4,7 @@
 #include "util.h"
 
 void Block_Divide(int n,int *a){
-    double ref=sqrt(n);
+    float ref=sqrt(n);
     int refINT=int(ceil(ref));
     for (int i=refINT;i>0;i--){
         if (1.0*n/i==int(1.0*n/i)){
@@ -21,8 +21,8 @@ void Block_Divide(int n,int *a){
 }
 
 unit   Steger_Warming_X(unit u){  
-    double lmd[4],lmdp[4],lmdn[4]; 
-    double ratio=u.param.rho/(2.0*gama) ;
+    float lmd[4],lmdp[4],lmdn[4]; 
+    float ratio=u.param.rho/(2.0*gama) ;
     lmd[0]=u.param.vel.u;
     lmd[1]=lmd[0];
     lmd[2]=lmd[0]-u.param.c;
@@ -44,8 +44,8 @@ unit   Steger_Warming_X(unit u){
 }
 
 unit   Steger_Warming_Y(unit u){  
-    double miu[4],miup[4],miun[4]; 
-    double ratio=u.param.rho/(2.0*gama) ;
+    float miu[4],miup[4],miun[4]; 
+    float ratio=u.param.rho/(2.0*gama) ;
     miu[0]=u.param.vel.v;
     miu[1]=miu[0];
     miu[2]=miu[0]-u.param.c;
@@ -66,14 +66,14 @@ unit   Steger_Warming_Y(unit u){
     return u;
 }
 
-void WENO_X(double (*fp)[4],double (*fn)[4],double *fx){
+void WENO_X(float (*fp)[4],float (*fn)[4],float *fx){
     int k;
-    double fp_WENO[4],fn_WENO[4];
-    double f1p[4],f2p[4],f3p[4],f1n[4],f2n[4],f3n[4];
-    double C1=0.1,C2=0.6,C3=0.3;
-    double omega1[4],omega2[4],omega3[4];
-    double alpha1[4],alpha2[4],alpha3[4];
-    double IS1[4],IS2[4],IS3[4];
+    float fp_WENO[4],fn_WENO[4];
+    float f1p[4],f2p[4],f3p[4],f1n[4],f2n[4],f3n[4];
+    float C1=0.1,C2=0.6,C3=0.3;
+    float omega1[4],omega2[4],omega3[4];
+    float alpha1[4],alpha2[4],alpha3[4];
+    float IS1[4],IS2[4],IS3[4];
 
     //正通量计算
     for (k=0;k<4;k++){
@@ -121,14 +121,14 @@ void WENO_X(double (*fp)[4],double (*fn)[4],double *fx){
     return ;
 }
 
-void WENO_Y(double (*gp)[4],double (*gn)[4],double *gy){
+void WENO_Y(float (*gp)[4],float (*gn)[4],float *gy){
     int k;
-    double gp_WENO[4],gn_WENO[4];
-    double g1p[4],g2p[4],g3p[4],g1n[4],g2n[4],g3n[4];
-    double C1=0.1,C2=0.6,C3=0.3;
-    double omega1[4],omega2[4],omega3[4];
-    double alpha1[4],alpha2[4],alpha3[4];
-    double IS1[4],IS2[4],IS3[4];
+    float gp_WENO[4],gn_WENO[4];
+    float g1p[4],g2p[4],g3p[4],g1n[4],g2n[4],g3n[4];
+    float C1=0.1,C2=0.6,C3=0.3;
+    float omega1[4],omega2[4],omega3[4];
+    float alpha1[4],alpha2[4],alpha3[4];
+    float IS1[4],IS2[4],IS3[4];
 
     //正通量计算
     for (k=0;k<4;k++){

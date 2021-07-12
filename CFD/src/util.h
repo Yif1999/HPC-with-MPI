@@ -5,9 +5,9 @@
 #define Rho 1.4 //初始密度
 #define TEND 4.0 //解算结束时间
 #define dt 0.01 //时间步长
-#define dx 0.015//x轴向步长
-#define dy 0.015 //y轴向步长
-#define  length 3.1 //simBox长度
+#define dx 0.01//x轴向步长
+#define dy 0.01 //y轴向步长
+#define length 3.1 //simBox长度
 #define height 1.0 //simBox高度
 #define stepL 0.62 //台阶左侧起始位置
 #define stepH  0.21 //台阶上部高度位置
@@ -15,30 +15,30 @@
 
 struct velocity
 {
-    double u;
-    double v;
+    float u;
+    float v;
 }; //结构体定义速度矢量
 
 struct data 
 {
     velocity vel;
-    double rho;
-    double c;
-    double p;
-    double E;
-    double fp[4];
-    double fn[4];
-    double gp[4];
-    double gn[4];
-    double fx[4];
-    double gy[4];
+    float rho;
+    float c;
+    float p;
+    float E;
+    float fp[4];
+    float fn[4];
+    float gp[4];
+    float gn[4];
+    float fx[4];
+    float gy[4];
 
 }; //结构体定义相关物理量
 
 struct coord
 {
-   double x;
-   double y;
+   float x;
+   float y;
 }; //结构体定义坐标
 
 struct unit
@@ -54,6 +54,6 @@ unit Steger_Warming_X(unit u);
 
 unit Steger_Warming_Y(unit u);
 
-void WENO_X(double (*fp)[4],double (*fn)[4],double *fx);
+void WENO_X(float (*fp)[4],float (*fn)[4],float *fx);
 
-void WENO_Y(double (*gp)[4],double (*gn)[4],double *gy);
+void WENO_Y(float (*gp)[4],float (*gn)[4],float *gy);

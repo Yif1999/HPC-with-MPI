@@ -25,10 +25,10 @@ int main(int argc, char *argv[]){
     int numH=int(floor(height/dy))/dims[1]*dims[1]; //修正后box高度网格数
     int numSL=int(floor(stepL/dx)); //修正后台阶前空余网格数
     int numSH=int(floor(stepH/dy)); //修正后台阶高度网格数
-    double L=numL*dx; //修正后box长度
-    double H=numH*dy; //修正后box高度
-    double sL=numSL*dx; //修正后台阶前空余长度
-    double sH=numSH*dy; //修正后台阶高度
+    float L=numL*dx; //修正后box长度
+    float H=numH*dy; //修正后box高度
+    float sL=numSL*dx; //修正后台阶前空余长度
+    float sH=numSH*dy; //修正后台阶高度
     // printf("%lf %lf %lf %lf\n",L,H,sL,sH);
     
     /*迪卡尔虚拟拓扑*/
@@ -48,15 +48,15 @@ int main(int argc, char *argv[]){
     }
 
     /*状态初始化*/
+    printf("%d %d\n",numH,numL);
     printf("%d %d\n",blockH,blockL);
     unit u[blockH][blockL]; //为分块开辟存储空间
-    printf("eihei\n");
     fflush(stdout);
     int i,j;
-    double t;
-    double dU[4];
-    double u_old,v_old,rho_old,E_old,c_old,p_old;
-    double corner[2]={sL,sH}; //台阶角点坐标
+    float t;
+    float dU[4];
+    float u_old,v_old,rho_old,E_old,c_old,p_old;
+    float corner[2]={sL,sH}; //台阶角点坐标
     for (i=0;i<blockH;i++){
         for (j=0;j<blockL;j++){
             //基本物理参数赋值
@@ -71,9 +71,9 @@ int main(int argc, char *argv[]){
         }
     }
     /*迭代推演*/
-    double fp[7][4],fn[7][4],gp[7][4],gn[7][4];
+    float fp[7][4],fn[7][4],gp[7][4],gn[7][4];
     int k,m,n;
-    double res_x[4],res_y[4];
+    float res_x[4],res_y[4];
     for (t=0;t<=4;t+=dt){
         // if (!id) printf("%lf percent...\n",t/4*100);
 
@@ -149,7 +149,7 @@ int main(int argc, char *argv[]){
 
                 //参数迭代更新
                 rho_old=u[i][j].param.rho;
-                printf("%lf\n",rho_old);
+                printf("%lf\n",dU[0]);
                 E_old=u[i][j].param.E;
                 c_old=u[i][j].param.c;
                 p_old=u[i][j].param.p;
@@ -164,7 +164,7 @@ int main(int argc, char *argv[]){
             }
     }
 
-    if (0){
+    if (id){
         FILE *fout=NULL;
         fout=fopen("../out/test.vtk","wb");
         if (fout == NULL){
@@ -188,7 +188,7 @@ int main(int argc, char *argv[]){
         fprintf(fout, "LOOKUP_TABLE default\n");
         for (i=3;i<blockH-3;i++){
             for (j=3;j<blockL-3;j++){
-                fprintf(fout,"%12.6lf",u[i][j].param.rho);
+                fprintf(fout,"%12.6lf",u[i][j].coords.y);
             }
             fprintf(fout,"\n");
         }
