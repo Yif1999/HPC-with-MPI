@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/solver.dir/src/miniCFD.cpp.o"
-  "CMakeFiles/solver.dir/src/blockDivide.cpp.o"
+  "CMakeFiles/solver.dir/src/util.cpp.o"
   "solver.pdb"
   "solver"
 )

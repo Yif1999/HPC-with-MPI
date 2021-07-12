@@ -1,1 +1,1 @@
-mpicxx    -rdynamic CMakeFiles/solver.dir/src/miniCFD.cpp.o CMakeFiles/solver.dir/src/blockDivide.cpp.o  -o solver 
+mpicxx    -rdynamic CMakeFiles/solver.dir/src/miniCFD.cpp.o CMakeFiles/solver.dir/src/util.cpp.o  -o solver 

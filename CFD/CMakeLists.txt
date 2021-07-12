@@ -8,5 +8,6 @@ message("building...")
 
 add_executable(solver
 ./src/miniCFD.cpp
-./src/blockDivide.cpp
+./src/util.cpp
+./src/util.h
 )

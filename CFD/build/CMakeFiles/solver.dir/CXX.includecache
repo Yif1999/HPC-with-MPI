@@ -6,14 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/ai/yif/CFD/src/blockDivide.cpp
-math.h
--
-stdio.h
--
-stdlib.h
--
-
 /home/ai/yif/CFD/src/miniCFD.cpp
 stdlib.h
 -
@@ -25,4 +17,20 @@ math.h
 -
 mpi.h
 -
+unistd.h
+-
+util.h
+/home/ai/yif/CFD/src/util.h
+
+/home/ai/yif/CFD/src/util.cpp
+math.h
+-
+stdio.h
+-
+stdlib.h
+-
+util.h
+/home/ai/yif/CFD/src/util.h
+
+/home/ai/yif/CFD/src/util.h
 

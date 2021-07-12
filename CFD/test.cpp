@@ -2,38 +2,49 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <util.h>
+#include "DynamicArray.h"
  
+  struct eihei
+  {
+    double x;
+    int i;
+  };
+
+int blockH=3,blockL=5;
+void testFunc(double (*a)[blockL][4]){
+  printf("%lf\n",a[1][1][1]);
+}
+
 int main(int argc, char **argv)
 {
-  int rank,size;
+
+  double fp[blockH][blockL][4];
+  testFunc(fp);
+  
+
+  // int rank,size;
+
+  // MPI_Init(&argc, &argv);
+  // MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+  // MPI_Comm_size(MPI_COMM_WORLD, &size);
+
+  // if (!rank){
+  //   printf("%d\n",size);
+  //   eihei hi;
+  //   hi.x= 0.25;
+  //   hi.i=1;
+  //   MPI_Send(&hi,sizeof(hi),MPI_BYTE,1,0,MPI_COMM_WORLD);
+  // }else{
+  //   eihei hello;
+  //   hello.x=0;
+  //   hello.i=0;
+  //   MPI_Recv(&hello,sizeof(hello),MPI_BYTE,0,0,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
+  //   printf("%lf %d\n",hello.x,hello.i);
+  // }
+
+
+  // MPI_Finalize();
  
-  int rankX, rankY;
-  int ndims = 2;
-  int dims[2] = {2, 2}; 
-  int periods[2] = {0, 0}; 
-  int reorder = 0;
- 
-  int remainX[2] = {1, 0}; 
-  int remainY[2] = {0, 1}; 
- 
-  MPI_Comm comm2d;
-  MPI_Comm commX, commY;
- 
-  MPI_Init(&argc, &argv);
- 
-  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-  MPI_Comm_size(MPI_COMM_WORLD, &size);
- 
-  MPI_Cart_create(MPI_COMM_WORLD, ndims, dims, periods, reorder, &comm2d);
-  MPI_Cart_sub(comm2d, remainX, &commX);
-  MPI_Cart_sub(comm2d, remainY, &commY);
- 
-  MPI_Comm_rank(commX, &rankX);
-  MPI_Comm_rank(commY, &rankY);
- 
-  printf("rank = %d;   X = %d;  Y = %d\n", rank, rankX, rankY);
- 
-  MPI_Finalize();
- 
-  return 0;
+  // return 0;
 }

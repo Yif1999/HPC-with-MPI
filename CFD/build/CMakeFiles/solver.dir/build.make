@@ -81,40 +81,40 @@ CMakeFiles/solver.dir/src/miniCFD.cpp.o.provides: CMakeFiles/solver.dir/src/mini
 CMakeFiles/solver.dir/src/miniCFD.cpp.o.provides.build: CMakeFiles/solver.dir/src/miniCFD.cpp.o
 
 
-CMakeFiles/solver.dir/src/blockDivide.cpp.o: CMakeFiles/solver.dir/flags.make
-CMakeFiles/solver.dir/src/blockDivide.cpp.o: ../src/blockDivide.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ai/yif/CFD/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/solver.dir/src/blockDivide.cpp.o"
-	mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/solver.dir/src/blockDivide.cpp.o -c /home/ai/yif/CFD/src/blockDivide.cpp
+CMakeFiles/solver.dir/src/util.cpp.o: CMakeFiles/solver.dir/flags.make
+CMakeFiles/solver.dir/src/util.cpp.o: ../src/util.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ai/yif/CFD/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/solver.dir/src/util.cpp.o"
+	mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/solver.dir/src/util.cpp.o -c /home/ai/yif/CFD/src/util.cpp
 
-CMakeFiles/solver.dir/src/blockDivide.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/solver.dir/src/blockDivide.cpp.i"
-	mpicxx $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ai/yif/CFD/src/blockDivide.cpp > CMakeFiles/solver.dir/src/blockDivide.cpp.i
+CMakeFiles/solver.dir/src/util.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/solver.dir/src/util.cpp.i"
+	mpicxx $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ai/yif/CFD/src/util.cpp > CMakeFiles/solver.dir/src/util.cpp.i
 
-CMakeFiles/solver.dir/src/blockDivide.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/solver.dir/src/blockDivide.cpp.s"
-	mpicxx $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ai/yif/CFD/src/blockDivide.cpp -o CMakeFiles/solver.dir/src/blockDivide.cpp.s
+CMakeFiles/solver.dir/src/util.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/solver.dir/src/util.cpp.s"
+	mpicxx $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ai/yif/CFD/src/util.cpp -o CMakeFiles/solver.dir/src/util.cpp.s
 
-CMakeFiles/solver.dir/src/blockDivide.cpp.o.requires:
+CMakeFiles/solver.dir/src/util.cpp.o.requires:
 
-.PHONY : CMakeFiles/solver.dir/src/blockDivide.cpp.o.requires
+.PHONY : CMakeFiles/solver.dir/src/util.cpp.o.requires
 
-CMakeFiles/solver.dir/src/blockDivide.cpp.o.provides: CMakeFiles/solver.dir/src/blockDivide.cpp.o.requires
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/blockDivide.cpp.o.provides.build
-.PHONY : CMakeFiles/solver.dir/src/blockDivide.cpp.o.provides
+CMakeFiles/solver.dir/src/util.cpp.o.provides: CMakeFiles/solver.dir/src/util.cpp.o.requires
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/util.cpp.o.provides.build
+.PHONY : CMakeFiles/solver.dir/src/util.cpp.o.provides
 
-CMakeFiles/solver.dir/src/blockDivide.cpp.o.provides.build: CMakeFiles/solver.dir/src/blockDivide.cpp.o
+CMakeFiles/solver.dir/src/util.cpp.o.provides.build: CMakeFiles/solver.dir/src/util.cpp.o
 
 
 # Object files for target solver
 solver_OBJECTS = \
 "CMakeFiles/solver.dir/src/miniCFD.cpp.o" \
-"CMakeFiles/solver.dir/src/blockDivide.cpp.o"
+"CMakeFiles/solver.dir/src/util.cpp.o"
 
 # External object files for target solver
 solver_EXTERNAL_OBJECTS =
 
 solver: CMakeFiles/solver.dir/src/miniCFD.cpp.o
-solver: CMakeFiles/solver.dir/src/blockDivide.cpp.o
+solver: CMakeFiles/solver.dir/src/util.cpp.o
 solver: CMakeFiles/solver.dir/build.make
 solver: CMakeFiles/solver.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ai/yif/CFD/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable solver"
@@ -126,7 +126,7 @@ CMakeFiles/solver.dir/build: solver
 .PHONY : CMakeFiles/solver.dir/build
 
 CMakeFiles/solver.dir/requires: CMakeFiles/solver.dir/src/miniCFD.cpp.o.requires
-CMakeFiles/solver.dir/requires: CMakeFiles/solver.dir/src/blockDivide.cpp.o.requires
+CMakeFiles/solver.dir/requires: CMakeFiles/solver.dir/src/util.cpp.o.requires
 
 .PHONY : CMakeFiles/solver.dir/requires
 

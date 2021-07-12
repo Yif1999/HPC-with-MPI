@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
 		for (i = 0; i < total_size/icol; i++)
 			res_final[i] = new float[icol];
 		float res[total_size/icol][icol];
-    MPI_Gatherv(unit,block_size,MPI_FLOAT,res,divide_count,disp,MPI_FLOAT,0,MPI_COMM_WORLD);
+    	MPI_Gatherv(unit,block_size,MPI_FLOAT,res,divide_count,disp,MPI_FLOAT,0,MPI_COMM_WORLD);
 		for (i=0;i<total_size/icol;i++){
 			for (j=0;j<icol;j++){
 				res_final[i][j]=res[i][j];

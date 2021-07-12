@@ -123,33 +123,6 @@ solver/fast:
 	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/build
 .PHONY : solver/fast
 
-src/blockDivide.o: src/blockDivide.cpp.o
-
-.PHONY : src/blockDivide.o
-
-# target to build an object file
-src/blockDivide.cpp.o:
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/blockDivide.cpp.o
-.PHONY : src/blockDivide.cpp.o
-
-src/blockDivide.i: src/blockDivide.cpp.i
-
-.PHONY : src/blockDivide.i
-
-# target to preprocess a source file
-src/blockDivide.cpp.i:
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/blockDivide.cpp.i
-.PHONY : src/blockDivide.cpp.i
-
-src/blockDivide.s: src/blockDivide.cpp.s
-
-.PHONY : src/blockDivide.s
-
-# target to generate assembly for a file
-src/blockDivide.cpp.s:
-	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/blockDivide.cpp.s
-.PHONY : src/blockDivide.cpp.s
-
 src/miniCFD.o: src/miniCFD.cpp.o
 
 .PHONY : src/miniCFD.o
@@ -177,6 +150,33 @@ src/miniCFD.cpp.s:
 	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/miniCFD.cpp.s
 .PHONY : src/miniCFD.cpp.s
 
+src/util.o: src/util.cpp.o
+
+.PHONY : src/util.o
+
+# target to build an object file
+src/util.cpp.o:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/util.cpp.o
+.PHONY : src/util.cpp.o
+
+src/util.i: src/util.cpp.i
+
+.PHONY : src/util.i
+
+# target to preprocess a source file
+src/util.cpp.i:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/util.cpp.i
+.PHONY : src/util.cpp.i
+
+src/util.s: src/util.cpp.s
+
+.PHONY : src/util.s
+
+# target to generate assembly for a file
+src/util.cpp.s:
+	$(MAKE) -f CMakeFiles/solver.dir/build.make CMakeFiles/solver.dir/src/util.cpp.s
+.PHONY : src/util.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -186,12 +186,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... solver"
 	@echo "... edit_cache"
-	@echo "... src/blockDivide.o"
-	@echo "... src/blockDivide.i"
-	@echo "... src/blockDivide.s"
 	@echo "... src/miniCFD.o"
 	@echo "... src/miniCFD.i"
 	@echo "... src/miniCFD.s"
+	@echo "... src/util.o"
+	@echo "... src/util.i"
+	@echo "... src/util.s"
 .PHONY : help
 
 
