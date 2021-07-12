@@ -89,11 +89,22 @@ void WENO_X(float (*fp)[4],float (*fn)[4],float *fx){
         f1p[k]=1.0/3*fp[1][k]-7.0/6*fp[2][k]+11.0/6*fp[3][k];
         f2p[k]=-1.0/6*fp[2][k]+5.0/6*fp[3][k]+1.0/3*fp[4][k];
         f3p[k]=1.0/3*fp[3][k]+5.0/6*fp[4][k]-1.0/6*fp[5][k];
+        fp_WENO[k]=omega1[k]*f1p[k]+omega2[k]*f2p[k]+omega3[k]*f3p[k];
+
+        IS1[k]=0.25*pow((fp[0][k]-4.0*fp[1][k]+3.0*fp[2][k]),2.0)+13.0/12.0*pow((fp[0][k]-2.0*fp[1][k]+fp[2][k]),2.0);
+        IS2[k]=0.25*pow((fp[1][k]-fp[3][k]),2.0)+13.0/12.0*pow((fp[1][k]-2.0*fp[2][k]+fp[3][k]),2.0);
+        IS3[k]=0.25*pow((3.0*fp[2][k]-4.0*fp[3][k]+fp[4][k]),2.0)+13.0/12.0*pow((fp[2][k]-2.0*fp[3][k]+fp[4][k]),2.0);
+        alpha1[k]=C1*1.0/pow((eps+IS1[k]),2.0);
+        alpha2[k]=C2*1.0/pow((eps+IS2[k]),2.0);
+        alpha3[k]=C3*1.0/pow((eps+IS3[k]),2.0);
+        omega1[k]=alpha1[k]/(alpha1[k]+alpha2[k]+alpha3[k]);
+        omega2[k]=alpha2[k]/(alpha1[k]+alpha2[k]+alpha3[k]);
+        omega3[k]=alpha3[k]/(alpha1[k]+alpha2[k]+alpha3[k]);
         f1n[k]=1.0/3*fp[0][k]-7.0/6*fp[1][k]+11.0/6*fp[2][k];
         f2n[k]=-1.0/6*fp[1][k]+5.0/6*fp[2][k]+1.0/3*fp[3][k];
         f3n[k]=1.0/3*fp[2][k]+5.0/6*fp[3][k]-1.0/6*fp[4][k];     
-        fp_WENO[k]=omega1[k]*f1p[k]+omega2[k]*f2p[k]+omega3[k]*f3p[k];
         fn_WENO[k]=omega1[k]*f1n[k]+omega2[k]*f2n[k]+omega3[k]*f3n[k];
+        
         fx[k]+=(fp_WENO[k]-fn_WENO[k])/dx;
     }
     //负通量计算
@@ -110,11 +121,22 @@ void WENO_X(float (*fp)[4],float (*fn)[4],float *fx){
         f1n[k]=1.0/3*fn[5][k]-7.0/6*fn[4][k]+11.0/6*fn[3][k];
         f2n[k]=-1.0/6*fn[4][k]+5.0/6*fn[3][k]+1.0/3*fn[2][k];
         f3n[k]=1.0/3*fn[3][k]+5.0/6*fn[2][k]-1.0/6*fn[1][k];
+        fn_WENO[k]=omega1[k]*f1n[k]+omega2[k]*f2n[k]+omega3[k]*f3n[k];
+
+        IS1[k]=0.25*pow((fn[6][k]-4.0*fn[5][k]+3.0*fn[4][k]),2.0)+13.0/12.0*pow((fn[6][k]-2.0*fn[5][k]+fn[4][k]),2.0);
+        IS2[k]=0.25*pow((fn[5][k]-fn[3][k]),2.0)+13.0/12.0*pow((fn[5][k]-2.0*fn[4][k]+fn[3][k]),2.0);
+        IS3[k]=0.25*pow((3.0*fn[4][k]-4.0*fn[3][k]+fn[2][k]),2.0)+13.0/12.0*pow((fn[4][k]-2.0*fn[3][k]+fn[2][k]),2.0);
+        alpha1[k]=C1*1.0/pow((eps+IS1[k]),2.0);
+        alpha2[k]=C2*1.0/pow((eps+IS2[k]),2.0);
+        alpha3[k]=C3*1.0/pow((eps+IS3[k]),2.0);
+        omega1[k]=alpha1[k]/(alpha1[k]+alpha2[k]+alpha3[k]);
+        omega2[k]=alpha2[k]/(alpha1[k]+alpha2[k]+alpha3[k]);
+        omega3[k]=alpha3[k]/(alpha1[k]+alpha2[k]+alpha3[k]);
         f1p[k]=1.0/3*fn[6][k]-7.0/6*fn[5][k]+11.0/6*fn[4][k];
         f2p[k]=-1.0/6*fn[5][k]+5.0/6*fn[4][k]+1.0/3*fn[3][k];
         f3p[k]=1.0/3*fn[4][k]+5.0/6*fn[3][k]-1.0/6*fn[2][k];  
         fp_WENO[k]=omega1[k]*f1p[k]+omega2[k]*f2p[k]+omega3[k]*f3p[k];
-        fn_WENO[k]=omega1[k]*f1n[k]+omega2[k]*f2n[k]+omega3[k]*f3n[k];
+
         fx[k]+=(fp_WENO[k]-fn_WENO[k])/dx;
     }
 
@@ -144,11 +166,22 @@ void WENO_Y(float (*gp)[4],float (*gn)[4],float *gy){
         g1p[k]=1.0/3*gp[1][k]-7.0/6*gp[2][k]+11.0/6*gp[3][k];
         g2p[k]=-1.0/6*gp[2][k]+5.0/6*gp[3][k]+1.0/3*gp[4][k];
         g3p[k]=1.0/3*gp[3][k]+5.0/6*gp[4][k]-1.0/6*gp[5][k];
+        gp_WENO[k]=omega1[k]*g1p[k]+omega2[k]*g2p[k]+omega3[k]*g3p[k];
+
+        IS1[k]=0.25*pow((gp[0][k]-4.0*gp[1][k]+3.0*gp[2][k]),2.0)+13.0/12.0*pow((gp[0][k]-2.0*gp[1][k]+gp[2][k]),2.0);
+        IS2[k]=0.25*pow((gp[1][k]-gp[3][k]),2.0)+13.0/12.0*pow((gp[1][k]-2.0*gp[2][k]+gp[3][k]),2.0);
+        IS3[k]=0.25*pow((3.0*gp[2][k]-4.0*gp[3][k]+gp[4][k]),2.0)+13.0/12.0*pow((gp[2][k]-2.0*gp[3][k]+gp[4][k]),2.0);
+        alpha1[k]=C1*1.0/pow((eps+IS1[k]),2.0);
+        alpha2[k]=C2*1.0/pow((eps+IS2[k]),2.0);
+        alpha3[k]=C3*1.0/pow((eps+IS3[k]),2.0);
+        omega1[k]=alpha1[k]/(alpha1[k]+alpha2[k]+alpha3[k]);
+        omega2[k]=alpha2[k]/(alpha1[k]+alpha2[k]+alpha3[k]);
+        omega3[k]=alpha3[k]/(alpha1[k]+alpha2[k]+alpha3[k]);        
         g1n[k]=1.0/3*gp[0][k]-7.0/6*gp[1][k]+11.0/6*gp[2][k];
         g2n[k]=-1.0/6*gp[1][k]+5.0/6*gp[2][k]+1.0/3*gp[3][k];
         g3n[k]=1.0/3*gp[2][k]+5.0/6*gp[3][k]-1.0/6*gp[4][k];     
-        gp_WENO[k]=omega1[k]*g1p[k]+omega2[k]*g2p[k]+omega3[k]*g3p[k];
         gn_WENO[k]=omega1[k]*g1n[k]+omega2[k]*g2n[k]+omega3[k]*g3n[k];
+
         gy[k]+=(gp_WENO[k]-gn_WENO[k])/dy;
     }
     //负通量计算
@@ -165,11 +198,22 @@ void WENO_Y(float (*gp)[4],float (*gn)[4],float *gy){
         g1n[k]=1.0/3*gn[5][k]-7.0/6*gn[4][k]+11.0/6*gn[3][k];
         g2n[k]=-1.0/6*gn[4][k]+5.0/6*gn[3][k]+1.0/3*gn[2][k];
         g3n[k]=1.0/3*gn[3][k]+5.0/6*gn[2][k]-1.0/6*gn[1][k];
+
+        IS1[k]=0.25*pow((gn[6][k]-4.0*gn[5][k]+3.0*gn[4][k]),2.0)+13.0/12.0*pow((gn[6][k]-2.0*gn[5][k]+gn[4][k]),2.0);
+        IS2[k]=0.25*pow((gn[5][k]-gn[3][k]),2.0)+13.0/12.0*pow((gn[5][k]-2.0*gn[4][k]+gn[3][k]),2.0);
+        IS3[k]=0.25*pow((3.0*gn[4][k]-4.0*gn[3][k]+gn[2][k]),2.0)+13.0/12.0*pow((gn[4][k]-2.0*gn[3][k]+gn[2][k]),2.0);
+        alpha1[k]=C1*1.0/pow((eps+IS1[k]),2.0);
+        alpha2[k]=C2*1.0/pow((eps+IS2[k]),2.0);
+        alpha3[k]=C3*1.0/pow((eps+IS3[k]),2.0);
+        omega1[k]=alpha1[k]/(alpha1[k]+alpha2[k]+alpha3[k]);
+        omega2[k]=alpha2[k]/(alpha1[k]+alpha2[k]+alpha3[k]);
+        omega3[k]=alpha3[k]/(alpha1[k]+alpha2[k]+alpha3[k]);
         g1p[k]=1.0/3*gn[6][k]-7.0/6*gn[5][k]+11.0/6*gn[4][k];
         g2p[k]=-1.0/6*gn[5][k]+5.0/6*gn[4][k]+1.0/3*gn[3][k];
         g3p[k]=1.0/3*gn[4][k]+5.0/6*gn[3][k]-1.0/6*gn[2][k];  
         gp_WENO[k]=omega1[k]*g1p[k]+omega2[k]*g2p[k]+omega3[k]*g3p[k];
         gn_WENO[k]=omega1[k]*g1n[k]+omega2[k]*g2n[k]+omega3[k]*g3n[k];
+        
         gy[k]+=(gp_WENO[k]-gn_WENO[k])/dy;
     }
 

@@ -11,7 +11,7 @@
 #define height 1.0 //simBox高度
 #define stepL 0.62 //台阶左侧起始位置
 #define stepH  0.21 //台阶上部高度位置
-#define eps 0.0001 //常数参量
+#define eps 0.000001 //常数参量
 
 struct velocity
 {
@@ -43,7 +43,6 @@ struct coord
 
 struct unit
 {
-    int flag=0;
     coord coords;
     data param;
 }; //结构体定义有限元
