@@ -20,7 +20,7 @@ void Block_Divide(int n,int *a){
     }
 }
 
-unit   Steger_Warming_X(unit u){  
+unit Steger_Warming_X(unit u){  
     float lmd[4],lmdp[4],lmdn[4]; 
     float ratio=u.param.rho/(2.0*gama) ;
     lmd[0]=u.param.vel.u;
@@ -43,7 +43,7 @@ unit   Steger_Warming_X(unit u){
     return u;
 }
 
-unit   Steger_Warming_Y(unit u){  
+unit Steger_Warming_Y(unit u){  
     float miu[4],miup[4],miun[4]; 
     float ratio=u.param.rho/(2.0*gama) ;
     miu[0]=u.param.vel.v;
@@ -198,6 +198,7 @@ void WENO_Y(float (*gp)[4],float (*gn)[4],float *gy){
         g1n[k]=1.0/3*gn[5][k]-7.0/6*gn[4][k]+11.0/6*gn[3][k];
         g2n[k]=-1.0/6*gn[4][k]+5.0/6*gn[3][k]+1.0/3*gn[2][k];
         g3n[k]=1.0/3*gn[3][k]+5.0/6*gn[2][k]-1.0/6*gn[1][k];
+        gn_WENO[k]=omega1[k]*g1n[k]+omega2[k]*g2n[k]+omega3[k]*g3n[k];
 
         IS1[k]=0.25*pow((gn[6][k]-4.0*gn[5][k]+3.0*gn[4][k]),2.0)+13.0/12.0*pow((gn[6][k]-2.0*gn[5][k]+gn[4][k]),2.0);
         IS2[k]=0.25*pow((gn[5][k]-gn[3][k]),2.0)+13.0/12.0*pow((gn[5][k]-2.0*gn[4][k]+gn[3][k]),2.0);
@@ -212,10 +213,16 @@ void WENO_Y(float (*gp)[4],float (*gn)[4],float *gy){
         g2p[k]=-1.0/6*gn[5][k]+5.0/6*gn[4][k]+1.0/3*gn[3][k];
         g3p[k]=1.0/3*gn[4][k]+5.0/6*gn[3][k]-1.0/6*gn[2][k];  
         gp_WENO[k]=omega1[k]*g1p[k]+omega2[k]*g2p[k]+omega3[k]*g3p[k];
-        gn_WENO[k]=omega1[k]*g1n[k]+omega2[k]*g2n[k]+omega3[k]*g3n[k];
-        
+
         gy[k]+=(gp_WENO[k]-gn_WENO[k])/dy;
     }
 
     return ;
+}
+
+int Find_Adrs(int i,int j,int blockL,int blockH,int *dims){
+    int index,overhead;
+    overhead=(i/blockH*dims[1]+j/blockL)*blockH*blockL;
+    index=(i%blockH)*blockL+j%blockL+overhead;
+    return index;
 }
