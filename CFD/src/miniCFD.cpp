@@ -324,9 +324,9 @@ int main(int argc, char *argv[]){
                 u[i][j].param.vel.v=(rho_old*v_old+dt*dU[2])/u[i][j].param.rho;
                 u[i][j].param.E=E_old+dt*dU[3];
 
-            if (isnan(dU[0])) {
-            printf("dU\n");
-            }
+            // if (isnan(dU[0])) {
+            // printf("dU\n");
+            // }
 
                 u[i][j].param.p=(gama-1)*(u[i][j].param.E-0.5*u[i][j].param.rho*(u[i][j].param.vel.u*u[i][j].param.vel.u+u[i][j].param.vel.v*u[i][j].param.vel.v));
                 u[i][j].param.c=sqrt(abs(u[i][j].param.p*gama/u[i][j].param.rho));
@@ -335,14 +335,20 @@ int main(int argc, char *argv[]){
             //DEBUG
             for (i=3;i<blockH-3;i++){
                 for (j=3;j<blockL-3;j++){
-                    if (isnan(u[i][j].param.rho)) u[i][j].param.rho=-1;
-                    // if (u[i][j].coords.x>corner[0] && u[i][j].coords.y<corner[1] ){
-                    //     u[i][j].param.rho=-2;
-                    // }
+                    if (u[i][j].coords.x>corner[0] && u[i][j].coords.y<corner[1] ){
+                        u[i][j].param.rho=-2;
+                    }else if (u[i][j].coords.x<corner[0]-dx && u[i][j].coords.y>corner[1]+dy){
+                        if (isnan(u[i][j].param.rho)) {
+                            u[i][j].param.rho=-1;
+                            printf("ERROR\n");
+                            MPI_Finalize();
+                            return 0;
+                        }
+                    }
                 }
             }
 
-        if (id==1){
+        if (0){
             char number[5];
             sprintf(number,"%d", frame);
             FILE *fout=NULL;
@@ -398,9 +404,9 @@ int main(int argc, char *argv[]){
 
 
         /*根进程写文件*/
-        if (!id){
+        if (!id && (frame%50==0)){
             char number[5];
-            sprintf(number,"%d", frame);
+            sprintf(number,"%d", frame/50);
             FILE *fout=NULL;
             char filename[50]={0};
             strcpy(filename,"../out/render");
@@ -436,15 +442,9 @@ int main(int argc, char *argv[]){
             }
             fclose(fout);
             fout=NULL;
-            frame++;
         }
-
-
-
-
-
+        frame++;
     }
-
 
 
     MPI_Finalize();

@@ -3,10 +3,10 @@
 #define C 1.0 //音速
 #define P 1.0 //初始压强
 #define Rho 1.4 //初始密度
-#define TEND (13*dt)//解算结束时间
-#define dt 0.005//时间步长
-#define dx 0.02//x轴向步长
-#define dy 0.02 //y轴向步长
+#define TEND 4//解算结束时间
+#define dt 0.00005//时间步长
+#define dx 0.005//x轴向步长
+#define dy 0.005 //y轴向步长
 #define length 3.0 //simBox长度
 #define height 1.0 //simBox高度
 #define stepL 0.6 //台阶左侧起始位置

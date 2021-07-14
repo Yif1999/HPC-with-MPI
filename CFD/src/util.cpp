@@ -42,9 +42,9 @@ unit Steger_Warming_X(unit u){
 
 
 
-            if (isnan(u.param.c)) {
-            printf("SW\n");
-            }
+            // if (isnan(u.param.c)) {
+            // printf("SW\n");
+            // }
     return u;
 }
 
@@ -96,9 +96,9 @@ void WENO_X(float (*fp)[4],float (*fn)[4],float *fx){
         f3p[k]=1.0/3*fp[3][k]+5.0/6*fp[4][k]-1.0/6*fp[5][k];
         fp_WENO[k]=omega1[k]*f1p[k]+omega2[k]*f2p[k]+omega3[k]*f3p[k];
 
-            if (isnan(fp[1][0])) {
-            printf("WENO\n");
-        }
+        //     if (isnan(fp[1][0])) {
+        //     printf("WENO\n");
+        // }
 
         IS1[k]=0.25*pow((fp[0][k]-4.0*fp[1][k]+3.0*fp[2][k]),2.0)+13.0/12.0*pow((fp[0][k]-2.0*fp[1][k]+fp[2][k]),2.0);
         IS2[k]=0.25*pow((fp[1][k]-fp[3][k]),2.0)+13.0/12.0*pow((fp[1][k]-2.0*fp[2][k]+fp[3][k]),2.0);
