@@ -3,14 +3,14 @@
 #define C 1.0 //音速
 #define P 1.0 //初始压强
 #define Rho 1.4 //初始密度
-#define TEND 1//解算结束时间
+#define TEND (13*dt)//解算结束时间
 #define dt 0.005//时间步长
 #define dx 0.02//x轴向步长
 #define dy 0.02 //y轴向步长
-#define length 3.1 //simBox长度
+#define length 3.0 //simBox长度
 #define height 1.0 //simBox高度
-#define stepL 0.62 //台阶左侧起始位置
-#define stepH  0.21 //台阶上部高度位置
+#define stepL 0.6 //台阶左侧起始位置
+#define stepH  0.2 //台阶上部高度位置
 #define eps 0.000001 //常数参量
 
 struct result
