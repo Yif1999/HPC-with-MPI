@@ -364,7 +364,7 @@ int main(int argc, char *argv[]){
                 sprintf(number,"%d", frame/interval);
                 FILE *fout=NULL;
                 char filename[50]={0};
-                strcpy(filename,"../render");
+                strcpy(filename,"../out/render");
                 strcat(filename,number);
                 strcat(filename,".vtk");
                 fout=fopen(filename,"wb");

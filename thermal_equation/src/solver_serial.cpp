@@ -45,7 +45,7 @@ void initmeshdata_s(SQuadMesh mesh, float ***meshval, int &irow, int &icol)
  */
 void solvethermal_s(float **meshval, int irow, int icol)
 {
-	double thre = 1.0; //1.0e-5;
+	double thre = 0.01; //1.0e-5;
 	int i, j, k, iteration = 0;
 	float **oldval, eps = 0.0, maxeps = 0.0, global_eps = 0.0;
 
