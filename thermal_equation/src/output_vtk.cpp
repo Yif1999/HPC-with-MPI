@@ -52,9 +52,7 @@ void outputdata(SQuadMesh mesh, float **meshval, int irow, int icol)
 			float val;
 			val = meshval[i][j];
 			fprintf(fout, "%10.6lf ", val);
-			//printf("%10.6lf ", val);
 		}
-		//printf("\n");
 		fprintf(fout, "\n");
 	}
 

@@ -12,13 +12,15 @@
 #define stepL 0.6 //台阶左侧起始位置
 #define stepH  0.2 //台阶上部高度位置
 #define eps 0.000001 //常数参量
+#define interval 50 //输出文件的迭代次数间隔
+// #define _OMP_PARALLEL //openmp并行开关(注释取消omp/去注释开启omp)
 
 struct result
 {
     float rho;
     float x;
     float y;
-};
+}; //结构体对最终结果封包
 
 struct velocity
 {
@@ -29,18 +31,18 @@ struct velocity
 struct data 
 {
     velocity vel;
-    float rho;
-    float c;
-    float p;
-    float E;
-    float fp[4];
-    float fn[4];
-    float gp[4];
-    float gn[4];
-    float fx[4];
-    float gy[4];
+    float rho;  //密度
+    float c;    //音速
+    float p;    //压强
+    float E;    //能量
+    float fp[4];    //x轴向正分裂
+    float fn[4];    //x轴向负分裂
+    float fx[4];    //x轴向导数
+    float gp[4];    //y轴向正分裂
+    float gn[4];    //y轴向负分裂
+    float gy[4];    //y轴向导数
 
-}; //结构体定义相关物理量
+}; //结构体定义相关参量
 
 struct coord
 {
@@ -50,19 +52,18 @@ struct coord
 
 struct unit
 {
-    int debug=0;
     coord coords;
     data param;
-}; //结构体定义有限元
+}; //结构体定义有限单元
 
-void Block_Divide(int n, int *a); //分块处理函数
+void Block_Divide(int n, int *a); //棋盘分块维度决策
 
-unit Steger_Warming_X(unit u);
+unit Steger_Warming_X(unit u);  //x轴向SW通量分裂
 
-unit Steger_Warming_Y(unit u);
+unit Steger_Warming_Y(unit u);  //y轴向SW通量分裂
 
-void WENO_X(float (*fp)[4],float (*fn)[4],float *fx);
+void WENO_X(float (*fp)[4],float (*fn)[4],float *fx);   //x轴向WENO差分
 
-void WENO_Y(float (*gp)[4],float (*gn)[4],float *gy);
+void WENO_Y(float (*gp)[4],float (*gn)[4],float *gy);   //y轴向WENO差分
 
-int Find_Adrs(int i,int j,int blockL,int blockH,int *dims);
+int Find_Adrs(int i,int j,int blockL,int blockH,int *dims); //二维数组映射至Gather后的一维内存地址

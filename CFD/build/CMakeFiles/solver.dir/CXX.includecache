@@ -17,6 +17,8 @@ math.h
 -
 mpi.h
 -
+omp.h
+-
 unistd.h
 -
 util.h
