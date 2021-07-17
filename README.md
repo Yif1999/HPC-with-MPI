@@ -1,5 +1,35 @@
 # HPC-with-MPI
 
+> **使用教材**《MPI与OpenMP并行的程序设计（C语言版）》
+
+
+
+## 基础练习
+
+### 文件结构
+
+- `basic_practice`
+
+  - `data`生成矩阵、向量等用于测试数据的源码与可执行文件
+
+  - 教材附录提供的相关头文件
+
+  - helloworld of MPI
+
+  - 枚举电路可用性
+
+  - 高斯消元求解
+
+  - 雅可比迭代求解
+
+  - 矩阵矩阵相乘
+
+  - 矩阵向量相乘
+
+  - pi的计算与omp混合编程
+
+    
+
 ## 弦振动问题
 
 ### 文件结构
@@ -60,6 +90,8 @@ mpirun -n 4 ./solver #运行
 
 ![screenshot](README.assets/screenshot.png)
 
+
+
 ## 前台阶流动模拟
 
 ### 文件结构
@@ -98,4 +130,3 @@ mpirun -n 6 ./solver #运行
 网格分辨率取200×600，时间步长取0.00005，使用paraview绘制。
 
 ![animation](README.assets/animation.gif)
-
