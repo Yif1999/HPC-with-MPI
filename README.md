@@ -130,3 +130,34 @@ mpirun -n 6 ./solver #运行
 网格分辨率取200×600，时间步长取0.00005，使用paraview绘制。
 
 ![animation](README.assets/animation.gif)
+
+## Bloom图像后期处理
+
+### 文件结构
+
+- `src`
+  - `bloom_serial.cpp` Bloom算法的串行版本
+  - `bloom_parallel.cpp` Bloom算法的并行版本
+  - `input.ppm` 输入的原始图像
+  - `output_serial.ppm` 串行算法输出的结果图像
+  - `output_parallel.ppm` 并行算法输出的结果图像
+
+> PPM文件是一种可移植位图格式，通过无压缩的方式顺序记录图像的像素信息，方便程序存取操作。此处为了尽量避免引入第三方依赖库造成用户编译困难，因而选择使用该图像格式，可以使用Photoshop打开查看。
+
+### 方案简介
+
+对Bloom算法的并行化处理可以出现在对图像的每一步操作上：提取亮部、应用下采样Kernel、创建双线性插值查找表、应用上采样Kernel、原图合成。此处由根节点加载原图像，并将数据进行行分块划分后分配至不同进程，而各个进程分别处理与之相对应的图像块，最后会合至根节点。在并行程序对图像操作的每一步结束后，都需要与相邻进程进行数据块边界的通信，其中图像下采样与双线性插值过程需要单层Ghost Layer，应用上采样Kernel的过程需要双层Ghost Layer。
+
+### 编译运行
+
+```bash
+cd ./src
+mpicxx ./bloom_parallel.cpp -o bloom_parallel
+mpirun -n 8 ./bloom_parallel
+```
+
+并行版本支持运行在2的N次方颗CPU核心上，例如在具备10核心数的本机上可以采用1、2、4、8进程数运行。
+
+### 结果呈现
+
+![comparison](README.assets/comparison.jpg)
